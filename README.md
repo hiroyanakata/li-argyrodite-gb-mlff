@@ -184,5 +184,5 @@ This repository holds only the code, small input templates, and the energy gauge
 
 ## 6. License and citation
 
-License: **to be added before publication.** If you use this code, please cite
-the paper above.
+Released under the MIT License (see [`LICENSE`](LICENSE)). If you use this code,
+please cite the paper above.
