@@ -1,0 +1,59 @@
+{
+  "elements": [
+    "Li",
+    "P",
+    "S",
+    "Br",
+    "I",
+    "Cl"
+  ],
+  "c_eV": [
+    -268.4094946294877,
+    -227.48177934879544,
+    -247.37802674431398,
+    -501.665208307521,
+    0.0,
+    -409.39712957731535
+  ],
+  "elements_present": [
+    "Li",
+    "P",
+    "S",
+    "Br",
+    "Cl"
+  ],
+  "source_model": "models/v4_l0.pth",
+  "fit_data": "v5build/v5_trainB.extxyz",
+  "fit_stride": 5,
+  "convention": "E_model_gauge = E_extxyz_cohesive + sum_i c[element_i]",
+  "fit_stats": {
+    "v5build/v5_trainB.extxyz": {
+      "n_frames": 1028,
+      "mae_before_per_atom": 274.3347991119188,
+      "mae_after_per_atom": 0.008944975379133965,
+      "rmse_after_per_atom": 0.036924176519813216,
+      "max_after_per_atom": 0.8046048049262168
+    },
+    "v3_test_emb.extxyz": {
+      "n_frames": 293,
+      "mae_before_per_atom": 275.4741258648141,
+      "mae_after_per_atom": 0.009176474844316298,
+      "rmse_after_per_atom": 0.01570763497140608,
+      "max_after_per_atom": 0.06895932555728472
+    },
+    "v5C_al_train.extxyz": {
+      "n_frames": 43,
+      "mae_before_per_atom": 275.08558695419237,
+      "mae_after_per_atom": 0.15607711804453384,
+      "rmse_after_per_atom": 0.2206671329537352,
+      "max_after_per_atom": 0.7820328284403802
+    },
+    "v5C_al_test.extxyz": {
+      "n_frames": 5,
+      "mae_before_per_atom": 279.34982689078976,
+      "mae_after_per_atom": 0.05069139567055334,
+      "rmse_after_per_atom": 0.051647274757928276,
+      "max_after_per_atom": 0.06975284457580058
+    }
+  }
+}

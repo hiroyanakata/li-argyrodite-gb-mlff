@@ -1,0 +1,53 @@
+# collective variable example: monitor distances
+
+colvarsTrajFrequency      10 # output every 10 steps
+colvarsRestartFrequency 1000 
+analysis on 
+
+colvar {
+  name one
+  oneDIMproj {
+    jobID 0
+    nbasis 4
+    ODPRC  1,3,3,2,2,0,0,1 
+    atoms {
+      atomNumbersRange 1-20
+#   atomNumbers    0   1    2   3 
+    }
+    refPositionsIni   Reactant.xyz   # initial coordinates for reference group
+    refPositionsFin   Product.xyz    # final   coordinates for reference group
+  }
+}
+
+colvar {
+  name two
+  oneDIMproj {
+    jobID 1
+    nbasis 4
+    ODPRC  1,3,3,2,2,0,0,1 
+    atoms {
+      atomNumbersRange 1-20
+#   atomNumbers    0   1    2   3 
+    }
+    refPositionsIni   Reactant.xyz   # initial coordinates for reference group
+    refPositionsFin   Product.xyz    # final   coordinates for reference group
+  }
+}
+
+
+# atomNumbers    0   1    2   3   4 
+# ODPRC 100,145,145,109,109,111,111,152,152,145
+
+
+
+harmonic {
+  name h_pot
+  colvars one 
+  targetCenters          6.00 
+  centers                0.00
+  forceConstant          5.0
+  targetNumSteps        100 
+  targetNumStages       300
+}
+
+

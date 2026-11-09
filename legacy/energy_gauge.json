@@ -1,0 +1,52 @@
+{
+  "elements": [
+    "Li",
+    "P",
+    "S",
+    "Br",
+    "I",
+    "Cl"
+  ],
+  "c_eV": [
+    -344.7539584632121,
+    -178.23519837811517,
+    -166.51876008509765,
+    -497.68507285713616,
+    0.0,
+    -405.2073573264584
+  ],
+  "elements_present": [
+    "Li",
+    "P",
+    "S",
+    "Br",
+    "Cl"
+  ],
+  "source_model": "matersim_model.pth",
+  "fit_data": "data/v3_train_reduce_emb.extxyz",
+  "fit_stride": 5,
+  "convention": "E_model_gauge = E_extxyz_cohesive + sum_i c[element_i]",
+  "fit_stats": {
+    "data/v3_train_reduce_emb.extxyz": {
+      "n_frames": 1055,
+      "mae_before_per_atom": 275.54320252599615,
+      "mae_after_per_atom": 0.03835434676174855,
+      "rmse_after_per_atom": 0.05937477506569529,
+      "max_after_per_atom": 0.888055920747364
+    },
+    "data/v3_test_emb.extxyz": {
+      "n_frames": 293,
+      "mae_before_per_atom": 275.50396546743474,
+      "mae_after_per_atom": 0.03477656583952186,
+      "rmse_after_per_atom": 0.04325297805725154,
+      "max_after_per_atom": 0.15984304769923804
+    },
+    "data/v3_exttest_emb.extxyz": {
+      "n_frames": 348,
+      "mae_before_per_atom": 273.6366869624283,
+      "mae_after_per_atom": 0.040819617209816875,
+      "rmse_after_per_atom": 0.048690599105543096,
+      "max_after_per_atom": 0.11666571153418949
+    }
+  }
+}

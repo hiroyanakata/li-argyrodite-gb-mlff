@@ -1,0 +1,18 @@
+# MatterSim 埋め込み抽出・クラスタリング・選別パイプライン用の依存
+# Genkai の学習環境とエンコーダを一致させるため mattersim は 1.2.0 に固定する。
+# mattersim==1.2.0 が torch / ase / numpy などの下流依存を引き込む。
+
+mattersim==1.2.0
+
+# 明示しておく主要ライブラリ（mattersim が入れる版と競合しない範囲で）
+torch>=2.0
+ase>=3.24            # 3.24 以降は full_3x3_to_voigt_6_stress の移設に注意（下記シム参照）
+numpy>=1.24
+scikit-learn>=1.3
+scipy>=1.10
+matplotlib>=3.7
+
+# メモ:
+# - ase>=3.24 では full_3x3_to_voigt_6_stress が ase.constraints から ase.stress へ移設され、
+#   mattersim 1.2.0 の import が失敗する。extract_embeddings.py 冒頭の互換シムで吸収済み。
+# - GPU で抽出する場合は環境に合った CUDA 版 torch を入れること（Colab は既定で GPU 版）。

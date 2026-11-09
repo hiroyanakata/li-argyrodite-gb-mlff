@@ -1,0 +1,54 @@
+# ODPMD input template (read by ODPMD.py, not by LAMMPS)
+
+units           metal
+boundary        p p p
+atom_style      atomic
+
+neighbor        2.0 bin
+neigh_modify    every 10 delay 0 check no
+
+atom_modify map hash sort 10000 2.0
+read_data   sample.data
+
+pair_style    chgnet ./CHGNET
+pair_coeff    * *    GBmodel.pth.tar  Li P S Br I Cl
+
+group        Li type 1
+
+velocity        all create  __TEMP__ 23456789
+fix             1 all nvt temp __TEMP__ __TEMP__ 0.5
+fix             2 all colvars ODP.colvars output ODP
+
+timestep        0.001
+
+# --- thermostat -------------------------------------------------------------
+# The old script hard-coded taut = 1.0 fs = the timestep, which makes the
+# Berendsen bath a per-step velocity rescale. It swallowed the work injected by
+# the ODP bias, so the potential energy climbed ~120 eV while T stayed at 300 K.
+md_thermostat   berendsen        # berendsen | langevin
+md_taut         100.0            # fs, Berendsen coupling time (>> timestep)
+md_friction     0.01             # 1/fs, used only by langevin
+md_equil        2000             # steps of unbiased equilibration before the bias ramps.
+                                 # Required for the rescaled cells: they start off-equilibrium
+                                 # and the first ~2 ps would otherwise go straight into the
+                                 # training set as unrelaxed junk. Not dumped.
+
+# --- adaptive sampling around the P-S dissociation --------------------------
+# intact           -> dump every "thermo" steps
+# >= sample_start  -> dump every sample_dense steps, and freeze the moving bias
+# >  sample_stop   -> abort, the lattice is collapsing and the frames are useless
+sample_rbreak   2.6              # P-S distance [A] counted as broken
+sample_start    1
+sample_stop     8
+sample_dense    10
+hold_on_break   1
+sample_after    2000             # steps sampled after the break, then stop.
+                                 # Without it a slow-pull run that breaks early would dump
+                                 # thousands of correlated frames at frozen bias.
+
+thermo         100
+dump          1  all custom  100 test.dump id type xs ys zs
+
+run          30000
+
+write_data   output00.data
